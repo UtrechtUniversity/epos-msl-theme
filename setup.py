@@ -21,7 +21,7 @@ setup(
     long_description=long_description,
 
     # The project's main homepage.
-    url='https://github.com/jcid/ckanext-custom_theme',
+    url='https://vcs.jcid.nl/open-data/ckan-universiteit-utrecht-epos-theme',
 
     # Author details
     author='''JCID''',

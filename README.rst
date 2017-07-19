@@ -90,7 +90,7 @@ Development Installation
 To install ckanext-custom_theme for development, activate your CKAN virtualenv and
 do::
 
-    git clone https://github.com/jcid/ckanext-custom_theme.git
+    git clone https://vcs.jcid.nl/open-data/ckan-universiteit-utrecht-epos-theme.git
     cd ckanext-custom_theme
     python setup.py develop
     pip install -r dev-requirements.txt
