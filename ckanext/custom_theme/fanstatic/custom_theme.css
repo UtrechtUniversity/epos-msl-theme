@@ -1,0 +1,28 @@
+.account-masthead {
+    background: #fff url(/images/bg-header.png);
+}
+
+.masthead {
+    background: #27A468 url(/images/bg-menu.png) bottom;
+}
+
+.masthead a {
+    color: #27A468;
+}
+
+.masthead .navigation {
+    margin-bottom: 2px;
+}
+
+.account-masthead .account ul li a {
+    color: #fff;
+}
+
+a.logo {
+    margin-top: 5px;
+    display: block;
+}
+
+body, .account-masthead .account ul, .site-footer, .homepage .module-search .module-content {
+    background: #27A468;
+}
