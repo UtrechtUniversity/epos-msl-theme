@@ -32,20 +32,40 @@
           </tr>
         {% endif %}
 
-        {% if pkg_dict.maintainer_email %}
-          <tr>
-            <th scope="row" class="dataset-label">{{ _('Maintainer') }}</th>
-            <td class="dataset-details" property="dc:contributor">{{ h.mail_to(email_address=pkg_dict.maintainer_email, name=pkg_dict.maintainer) }}</td>
-          </tr>
-        {% elif pkg_dict.maintainer %}
-          <tr>
-            <th scope="row" class="dataset-label">{{ _('Maintainer') }}</th>
-            <td class="dataset-details" property="dc:contributor">{{ pkg_dict.maintainer }}</td>
-          </tr>
-        {% endif %}
+	{% if false %}
+	<tr>
+	    <th>Author (extended)</th>
+	    <td>
+		{% set list1 = pkg_dict.author.split(';') %}
+		{% for list in list1 %}
+			<p><a href="mailto:info@gfz.de">{{ list }}</a></p>
+		{% endfor %}
+	    </td>	
+	</tr>
+	{% endif %}
+        
+	{% if false %}
+	  {% if pkg_dict.maintainer_email %}
+            <tr>
+              <th scope="row" class="dataset-label">{{ _('Maintainer') }}</th>
+              <td class="dataset-details" property="dc:contributor">{{ h.mail_to(email_address=pkg_dict.maintainer_email, name=pkg_dict.maintainer) }}</td>
+            </tr>
+          {% elif pkg_dict.maintainer %}
+            <tr>
+              <th scope="row" class="dataset-label">{{ _('Maintainer') }}</th>
+              <td class="dataset-details" property="dc:contributor">{{ pkg_dict.maintainer }}</td>
+            </tr>
+          {% endif %}
+	{% endif %}
 
+        <tr>
+          <th scope="row" class="dataset-label">{{ _('Maintainer') }}</th>
+          <td class="dataset-details" property="dc:contributor">
+	    <a href="http://pmd.gfz-potsdam.de/portal/" target="_new">{{ pkg_dict.maintainer }}</a>
+          </td>
+	</tr>
 
-        {% if pkg_dict.version %}
+	{% if pkg_dict.version %}
           <tr>
             <th scope="row" class="dataset-label">{{ _("Version") }}</th>
             <td class="dataset-details">{{ pkg_dict.version }}</td>
@@ -75,10 +95,39 @@
       {% block extras scoped %}
         {% for extra in h.sorted_extras(pkg_dict.extras) %}
           {% set key, value = extra %}
+
+          {% if _(key)=='References' %}
+             <tr>
+                <th>References (extended)
+                </th>
+                <td>
+                  {% set list1 = value.split(' -------- ') %}
+                  {% for list in list1 %}
+                        {% set list2 = list.split('doi:') %}
+                        <p><a href="http://doi.org/{{ list2.1 }}" target="_new">{{ list2.0 }}</a></p>
+                  {% endfor %}
+                </td>
+             </tr
+          {% endif %}
+
           <tr rel="dc:relation" resource="_:extra{{ i }}">
             <th scope="row" class="dataset-label" property="rdfs:label">{{ _(key) }}</th>
             <td class="dataset-details" property="rdf:value">{{ value }}</td>
           </tr>
+          {% if _(key)=='Referencidddddes' %}
+	     <tr>
+	        <th>References (extended)
+                </th>
+		<td>
+                  {% set list1 = value.split(' -------- ') %}
+                  {% for list in list1 %}
+                        {% set list2 = list.split('doi:') %}
+			<p><a href="http://doi.org/{{ list2.1 }}" target="_new">{{ list2.0 }}</a></p>
+                  {% endfor %}
+		</td>	
+             </tr 
+	  {% endif %}
+
         {% endfor %}
       {% endblock %}
 
