@@ -20,7 +20,7 @@
           </tr>
         {% endif %}
 
-        {% if pkg_dict.author_email %}
+        {% if pkg_dict.author_email and false %}
           <tr>
             <th scope="row" class="dataset-label">{{ _("Author") }}</th>
             <td class="dataset-details" property="dc:creator">{{ h.mail_to(email_address=pkg_dict.author_email, name=pkg_dict.author) }}</td>
@@ -96,27 +96,9 @@
         {% for extra in h.sorted_extras(pkg_dict.extras) %}
           {% set key, value = extra %}
 
-          {% if _(key)=='References' %}
-             <tr>
-                <th>References (extended)
-                </th>
-                <td>
-                  {% set list1 = value.split(' -------- ') %}
-                  {% for list in list1 %}
-                        {% set list2 = list.split('doi:') %}
-                        <p><a href="http://doi.org/{{ list2.1 }}" target="_new">{{ list2.0 }}</a></p>
-                  {% endfor %}
-                </td>
-             </tr
-          {% endif %}
-
-          <tr rel="dc:relation" resource="_:extra{{ i }}">
-            <th scope="row" class="dataset-label" property="rdfs:label">{{ _(key) }}</th>
-            <td class="dataset-details" property="rdf:value">{{ value }}</td>
-          </tr>
-          {% if _(key)=='Referencidddddes' %}
+          {% if _(key)=='References' or _(key)=='Cites' or _(key)=='Is supplement to'  %}
 	     <tr>
-	        <th>References (extended)
+	        <th>{{ _(key) }}
                 </th>
 		<td>
                   {% set list1 = value.split(' -------- ') %}
@@ -125,9 +107,13 @@
 			<p><a href="http://doi.org/{{ list2.1 }}" target="_new">{{ list2.0 }}</a></p>
                   {% endfor %}
 		</td>	
-             </tr 
+             </tr>
+	  {% else %}
+            <tr rel="dc:relation" resource="_:extra{{ i }}">
+              <th scope="row" class="dataset-label" property="rdfs:label">{{ _(key) }}</th>
+              <td class="dataset-details" property="rdf:value">{{ value }}</td>
+            </tr>
 	  {% endif %}
-
         {% endfor %}
       {% endblock %}
 
