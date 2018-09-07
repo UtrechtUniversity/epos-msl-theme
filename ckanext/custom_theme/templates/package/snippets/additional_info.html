@@ -59,7 +59,7 @@
 	{% endif %}
 
         <tr>
-          <th scope="row" class="dataset-label">{{ _('Maintainer') }}</th>
+          <th scope="row" class="dataset-label">{{ _('Provided by') }}</th>
           <td class="dataset-details" property="dc:contributor">
 	    <a href="http://pmd.gfz-potsdam.de/portal/" target="_new">{{ pkg_dict.maintainer }}</a>
           </td>
@@ -73,23 +73,6 @@
         {% endif %}
 
         {% if h.check_access('package_update',{'id':pkg_dict.id}) %}
-        {% endif %}
-        {% if pkg_dict.metadata_modified %}
-          <tr>
-            <th scope="row" class="dataset-label">{{ _("Last Updated") }}</th>
-            <td class="dataset-details">
-                {% snippet 'snippets/local_friendly_datetime.html', datetime_obj=pkg_dict.metadata_modified %}
-            </td>
-          </tr>
-        {% endif %}
-        {% if pkg_dict.metadata_created %}
-          <tr>
-            <th scope="row" class="dataset-label">{{ _("Created") }}</th>
-
-            <td class="dataset-details">
-                {% snippet 'snippets/local_friendly_datetime.html', datetime_obj=pkg_dict.metadata_created %}
-            </td>
-          </tr>
         {% endif %}
 
       {% block extras scoped %}
