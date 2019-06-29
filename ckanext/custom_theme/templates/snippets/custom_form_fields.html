@@ -1,0 +1,40 @@
+{#
+Adds a block of custom form fields.
+
+extras - The fields to add.
+errors - A dict of errors for the fields.
+limit  - The total number of fields that should be output.
+Example:
+
+  {% snippet 'snippets/custom_form_fields.html', extras=data.extras, errors=errors, limit=3 %}
+
+#}
+{% import "macros/form.html" as form %}
+
+
+{% set keys = ['Citation', 'Cites', 'Created at repository', 'Dataset contact', 'Is supplement to', 'Publication date', 'Publisher', 'References', 'geobox-wLong', 'geobox-eLong', 'geobox-nLat', 'geobox-sLat'] %}
+
+<div data-module="custom-fields">
+
+{% set selection = [] %}
+{% for key in keys %}
+    {% for x in extras if x.key == key %}{% do selection.append(x.value) %}{% endfor %}
+{% endfor %}
+
+{# selection|join(',') #}
+
+{% for key in keys %}
+    {% set prefix = 'extras__%d__' % loop.index0 %}
+    <input type="hidden" name="{{ prefix ~ 'key' }}" value="{{ key }}">
+
+    {% set savedVal = { 'value': '-' } %} 
+    {% for x in extras if x.key == key %}{% if savedVal.update({'value':x.value}) %}{% endif %}{% endfor %}
+
+    {# savedVal.value #}
+
+    {{ form.input(prefix ~ 'value', id='field-extra', label=key, placeholder=_('eg. A descriptive title'), value=savedVal.value, error=errors[prefix ~ 'key'] or errors[prefix ~ 'value'], classes=['control-group', 'control-medium'], attrs={'data-module': 'slug-preview-target'}) }}
+
+{% endfor %} 
+</div>
+
+
