@@ -61,8 +61,13 @@
         <tr>
           <th scope="row" class="dataset-label">{{ _('Provided by') }}</th>
           <td class="dataset-details" property="dc:contributor">
-	    <a href="http://pmd.gfz-potsdam.de/portal/" target="_new">{{ pkg_dict.maintainer }}</a>
-          </td>
+	   {# dit moet nog anders!! #}
+	   {% if pkg_dict.maintainer.startswith('GFZ') %} 
+		<a href="http://pmd.gfz-potsdam.de/portal/" target="_new">{{ pkg_dict.maintainer }}</a>
+	   {% else %}
+		{{ pkg_dict.maintainer }}
+           {% endif %} 
+	   </td>
 	</tr>
 
 	{% if pkg_dict.version %}
