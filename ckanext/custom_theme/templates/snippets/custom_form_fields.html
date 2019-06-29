@@ -32,7 +32,7 @@ Example:
 
     {# savedVal.value #}
 
-    {{ form.input(prefix ~ 'value', id='field-extra', label=key, placeholder=_('eg. A descriptive title'), value=savedVal.value, error=errors[prefix ~ 'key'] or errors[prefix ~ 'value'], classes=['control-group', 'control-medium'], attrs={'data-module': 'slug-preview-target'}) }}
+    {{ form.input(prefix ~ 'value', id='field-extra', label=key, placeholder=_('Add value'), value=savedVal.value, error=errors[prefix ~ 'key'] or errors[prefix ~ 'value'], classes=['control-group', 'control-medium'], attrs={'data-module': 'slug-preview-target'}) }}
 
 {% endfor %} 
 </div>
