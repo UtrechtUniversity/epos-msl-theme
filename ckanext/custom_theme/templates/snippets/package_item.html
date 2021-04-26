@@ -23,11 +23,11 @@ Example:
     {% block content %}
       <div class="dataset-content">
         {% if package.maintainer.startswith('GFZ') %}
-            <img src="http://dataservices.gfz-potsdam.de/portal/images/BannerDataServices.png" class="media-image" style="height: 30px; background-color:#00589C;">
+            <img src="/images/logo-gfz.png" class="media-image" style="height: 30px; background-color:#00589C;">
 	{% elif package.maintainer.startswith('Utrecht') %}
-            <img src="https://www.uu.nl/sites/all/themes/uubasetheme/images/logo-en.svg" class="media-image" style="height: 30px;">
+            <img src="/images/logo-uu.png" class="media-image" style="height: 30px;">
         {% elif package.maintainer.startswith('CSIC') %}
-            <img src="http://www.ictja.csic.es/images/logo/Logo_Home_B_500.png" class="media-image" style="height: 30px">
+            <img src="/images/logo-csic.jpg" class="media-image" style="height: 30px">
         {% endif%}
         {% block heading %}
           <h3 class="dataset-heading">
